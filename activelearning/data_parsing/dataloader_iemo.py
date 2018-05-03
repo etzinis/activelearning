@@ -12,13 +12,13 @@ import re
 import sys
 from pprint import pprint
 
-nldpr_dir = os.path.join(
+al_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     '../../')
-sys.path.insert(0, nldpr_dir)
+sys.path.insert(0, al_dir)
 
-from nldrp.config import BASE_PATH
-from nldrp.io.AudioReader import AudioFile
+from al.config import BASE_PATH
+from al.io.AudioReader import AudioFile
 
 
 class IemocapDataLoader(object):

@@ -19,30 +19,30 @@ from sklearn.externals import joblib
 from progress.bar import ChargingBar
 import subprocess
 
-nldrp_dir = os.path.join(
+al_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     '../../../')
-sys.path.insert(0, nldrp_dir)
-import nldrp.config
-import nldrp.io.dataloader as dl_savee
-import nldrp.io.dataloader_emodb as dl_berlin
-import nldrp.io.dataloader_iemo as dl_iemocap
-import nldrp.feature_extraction.frame_breaker as seg_breaker
+sys.path.insert(0, al_dir)
+import al.config
+import al.io.dataloader as dl_savee
+import al.io.dataloader_emodb as dl_berlin
+import al.io.dataloader_iemo as dl_iemocap
+import al.feature_extraction.frame_breaker as seg_breaker
 
 from scipy.io.wavfile import write as wav_write
 
 def load_data(dataset_name):
     if dataset_name == 'SAVEE':
         loader_obj = dl_savee.SaveeDataloader(
-                      savee_path=nldrp.config.SAVEE_PATH)
+                      savee_path=al.config.SAVEE_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'IEMOCAP':
         loader_obj = dl_iemocap.IemocapDataLoader(
-            iemocap_path=nldrp.config.IEMOCAP_PATH)
+            iemocap_path=al.config.IEMOCAP_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'BERLIN':
         loader_obj = dl_berlin.EmodbDataLoader(
-            emodb_path=nldrp.config.BERLIN_PATH)
+            emodb_path=al.config.BERLIN_PATH)
         dataset_dic = loader_obj.data_dict
     else:
         raise NotImplementedError('Dataset: {} is not yet supported '
@@ -215,11 +215,11 @@ def get_args():
         Another subdic for all the sentences with their ids  
         and a 1d numpy matrix for each one of them.
         """,
-        default=nldrp.config.EXTRACTED_FEATURES_PATH)
+        default=al.config.EXTRACTED_FEATURES_PATH)
     parser.add_argument("--config", type=str,
                         help="""Opensmile configuration PAth""",
                         required=False,
-                        default=nldrp.config.OPENSMILE_CONFIG_PATH)
+                        default=al.config.OPENSMILE_CONFIG_PATH)
     parser.add_argument("--segment_dur", type=float,
                         help="""The specified length of the segments 
                         in seconds
