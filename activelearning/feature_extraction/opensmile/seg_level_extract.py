@@ -21,28 +21,29 @@ import subprocess
 
 al_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    '../../../')
+    '/home/teo/Documents/Thesis/activelearning/')
 sys.path.insert(0, al_dir)
-import al.config
-import al.io.dataloader as dl_savee
-import al.io.dataloader_emodb as dl_berlin
-import al.io.dataloader_iemo as dl_iemocap
-import al.feature_extraction.frame_breaker as seg_breaker
+
+import activelearning.config
+#import al.io.dataloader as dl_savee
+#import al.io.dataloader_emodb as dl_berlin
+import activelearning.data_parsing.dataloader_iemo as dl_iemocap
+#import al.feature_extraction.frame_breaker as seg_breaker
 
 from scipy.io.wavfile import write as wav_write
 
 def load_data(dataset_name):
     if dataset_name == 'SAVEE':
         loader_obj = dl_savee.SaveeDataloader(
-                      savee_path=al.config.SAVEE_PATH)
+                      savee_path=activelearning.config.SAVEE_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'IEMOCAP':
         loader_obj = dl_iemocap.IemocapDataLoader(
-            iemocap_path=al.config.IEMOCAP_PATH)
+            iemocap_path=activelearning.config.IEMOCAP_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'BERLIN':
         loader_obj = dl_berlin.EmodbDataLoader(
-            emodb_path=al.config.BERLIN_PATH)
+            emodb_path=activelearning.config.BERLIN_PATH)
         dataset_dic = loader_obj.data_dict
     else:
         raise NotImplementedError('Dataset: {} is not yet supported '
@@ -215,11 +216,11 @@ def get_args():
         Another subdic for all the sentences with their ids  
         and a 1d numpy matrix for each one of them.
         """,
-        default=al.config.EXTRACTED_FEATURES_PATH)
+        default=activelearning.config.EXTRACTED_FEATURES_PATH)
     parser.add_argument("--config", type=str,
                         help="""Opensmile configuration PAth""",
                         required=False,
-                        default=al.config.OPENSMILE_CONFIG_PATH)
+                        default=activelearning.config.OPENSMILE_CONFIG_PATH)
     parser.add_argument("--segment_dur", type=float,
                         help="""The specified length of the segments 
                         in seconds
