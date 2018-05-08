@@ -11,14 +11,15 @@ import os
 import re
 import sys
 from pprint import pprint
+from pydub import AudioSegment
 
 al_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    '../../')
+    '/home/teo/Documents/Thesis/activelearning/')
 sys.path.insert(0, al_dir)
 
-from al.config import BASE_PATH
-from al.io.AudioReader import AudioFile
+from activelearning.config import BASE_PATH
+#from activelearning.io.AudioReader import AudioFile
 
 
 class IemocapDataLoader(object):
@@ -77,17 +78,24 @@ class IemocapDataLoader(object):
 
         wavpath = os.path.join(wavs_dir, fake_identifier,
                                utt_id + '.wav')
-        audiofile = AudioFile(wavpath)
-        fs = audiofile.get_fs()
-        wav_dur = audiofile.get_duration_seconds()
-        wav = audiofile.read_audio_file(normalize=True, mix_channels=True)
+        
+        audiofile = AudioSegment.from_file(wavpath)
+        fs = audiofile.frame_rate
+        audiofile.duration_seconds == (len(audiofile) / 1000.0)
+        wav_dur = audiofile.duration_seconds
+
+        # ----- AudioFile -------
+        #audiofile = AudioFile(wavpath)
+        #fs = audiofile.get_fs()
+        #wav_dur = audiofile.get_duration_seconds()
+        #wav = audiofile.read_audio_file(normalize=True, mix_channels=True)
 
         info = {
             'speaker': true_speaker,
             'wavpath': wavpath,
             'emotion': true_emotion,
             'Fs': fs,
-            'wav': wav,
+            #'wav': wav,
             'wav_duration': wav_dur
         }
 
