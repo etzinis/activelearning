@@ -20,28 +20,29 @@ from progress.bar import ChargingBar
 import subprocess
 import time
 
-nldrp_dir = os.path.join(
+al_dir = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    '../../../')
-sys.path.insert(0, nldrp_dir)
-import nldrp.config
-import nldrp.io.dataloader as dl_savee
-import nldrp.io.dataloader_emodb as dl_berlin
-import nldrp.io.dataloader_iemo as dl_iemocap
+    '/home/teo/Documents/Thesis/activelearning/')
+sys.path.insert(0, al_dir)
+
+import activelearning.config
+#import activelearning.io.dataloader as dl_savee
+#import activelearning.io.dataloader_emodb as dl_berlin
+import activelearning.data_parsing.dataloader_iemo as dl_iemocap
 
 
 def load_data(dataset_name):
     if dataset_name == 'SAVEE':
         loader_obj = dl_savee.SaveeDataloader(
-                      savee_path=nldrp.config.SAVEE_PATH)
+                      savee_path=activelearning.config.SAVEE_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'IEMOCAP':
         loader_obj = dl_iemocap.IemocapDataLoader(
-            iemocap_path=nldrp.config.IEMOCAP_PATH)
+            iemocap_path=activelearning.config.IEMOCAP_PATH)
         dataset_dic = loader_obj.data_dict
     elif dataset_name == 'BERLIN':
         loader_obj = dl_berlin.EmodbDataLoader(
-            emodb_path=nldrp.config.BERLIN_PATH)
+            emodb_path=activelearning.config.BERLIN_PATH)
         dataset_dic = loader_obj.data_dict
     else:
         raise NotImplementedError('Dataset: {} is not yet supported '
@@ -150,11 +151,11 @@ def get_args():
         Another subdic for all the sentences with their ids  
         and a 1d numpy matrix for each one of them.
         """,
-        default=nldrp.config.EXTRACTED_FEATURES_PATH )
+        default=activelearning.config.EXTRACTED_FEATURES_PATH )
     parser.add_argument("--config", type=str,
                         help="""Opensmile configuration PAth""",
                         required=False,
-                        default=nldrp.config.OPENSMILE_CONFIG_PATH)
+                        default=activelearning.config.OPENSMILE_CONFIG_PATH)
     args = parser.parse_args()
     return args
 
