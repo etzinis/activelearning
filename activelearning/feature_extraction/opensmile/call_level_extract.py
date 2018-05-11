@@ -26,9 +26,9 @@ al_dir = os.path.join(
 sys.path.insert(0, al_dir)
 
 import activelearning.config
+import activelearning.data_parsing.dataloader_iemo as dl_iemocap
 #import activelearning.io.dataloader as dl_savee
 #import activelearning.io.dataloader_emodb as dl_berlin
-import activelearning.data_parsing.dataloader_iemo as dl_iemocap
 
 
 def load_data(dataset_name):

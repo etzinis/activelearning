@@ -79,6 +79,7 @@ class IemocapDataLoader(object):
         wavpath = os.path.join(wavs_dir, fake_identifier,
                                utt_id + '.wav')
         
+        # Use pydub instead
         audiofile = AudioSegment.from_file(wavpath)
         fs = audiofile.frame_rate
         audiofile.duration_seconds == (len(audiofile) / 1000.0)
