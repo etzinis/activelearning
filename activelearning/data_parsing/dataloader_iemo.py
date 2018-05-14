@@ -107,7 +107,7 @@ class IemocapDataLoader(object):
         data_dict = {spk: {} for spk in self.speaker_ids}
         for session in self.sessions:
             wavs_dir = os.path.join(self.data_dir, session,
-                                    'sentence', 'wav')
+                                    'sentences', 'wav')
             annotations_dir = os.path.join(self.data_dir,
                                            session, 'dialog',
                                            'EmoEvaluation')
