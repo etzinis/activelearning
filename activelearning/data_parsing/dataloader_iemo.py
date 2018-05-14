@@ -79,6 +79,7 @@ class IemocapDataLoader(object):
         wavpath = os.path.join(wavs_dir, fake_identifier,
                                utt_id + '.wav')
         
+        # Use pydub instead
         audiofile = AudioSegment.from_file(wavpath)
         fs = audiofile.frame_rate
         audiofile.duration_seconds == (len(audiofile) / 1000.0)
@@ -106,7 +107,7 @@ class IemocapDataLoader(object):
         data_dict = {spk: {} for spk in self.speaker_ids}
         for session in self.sessions:
             wavs_dir = os.path.join(self.data_dir, session,
-                                    'sentence', 'wav')
+                                    'sentences', 'wav')
             annotations_dir = os.path.join(self.data_dir,
                                            session, 'dialog',
                                            'EmoEvaluation')

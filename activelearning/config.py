@@ -13,8 +13,7 @@ BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #OPENSMILE_CONFIG_PATH = '/home/thymios/Desktop/Research/opensmile-2.3' \
  #                       '.0/config/emobase2010.conf'
 
-# Paths I need
+# Paths I will need
 EXTRACTED_FEATURES_PATH = '/home/teo/Documents/Thesis/Features/'
 IEMOCAP_PATH = '/home/teo/Documents/Thesis/IEMOCAP/'
-OPENSMILE_CONFIG_PATH = '/home/teo/Documents/Thesis/opensmile-2.3' \
-                        '.0/config/emobase2010.conf'                       
+OPENSMILE_CONFIG_PATH = '/home/teo/Documents/Thesis/opensmile-2.3.0/config/emobase2010.conf'                       
